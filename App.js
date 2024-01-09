@@ -34,19 +34,5 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     marginTop: 40
-  },
-  inputContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    paddingVertical: 10,
-    borderBottomWidth: .2,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  textInput: {
-    borderColor: "gray",
-    width: "70%",
-    borderWidth: 1,
-    padding: 10,
-  },
+  }
 });
