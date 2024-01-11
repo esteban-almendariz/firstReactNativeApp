@@ -1,26 +1,16 @@
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, Text, FlatList, Pressable, StyleSheet } from "react-native";
 
-const GoalItem = ({goalList}) => {
+const GoalItem = ({onDeleteItem, id, text}) => {
     return (
-        <View style={styles.goalsContainer}>
-          <FlatList data={goalList} renderItem={itemData => {
-              return (
-                  <View style={styles.goalItem}>
-                  <Text style={styles.goalText}>{itemData.item.text}</Text>
+            <Pressable onPress={onDeleteItem.bind(this, id)}>
+                <View style={styles.goalItem}>
+                    <Text style={styles.goalText}>{text}</Text>
                 </View>
-              )
-            }}
-          />
-      </View>
+            </Pressable>
     )
-
 }
 
 const styles = StyleSheet.create({
-    goalsContainer: {
-        marginTop: 25,
-        flex: 5
-      },
       goalItem: {
         backgroundColor:'#5e0acc',
         borderRadius: 6,

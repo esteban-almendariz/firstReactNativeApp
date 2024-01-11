@@ -6,25 +6,42 @@ import GoalInput from './components/GaolInput';
 
 export default function App() {
 
-  const [enteredGoalText, setEnteredGoalText] = useState('')
   const [goalList, setGoalList] = useState([])
 
-  const goalChangeHandler = (enteredText) => {
-      setEnteredGoalText(enteredText)
-  }
-
-  const addGoalHandler = () => {
+  const addGoalHandler = (goal) => {
     setGoalList(prevState => [
       ...prevState,
-      {text: enteredGoalText, key: Math.random().toString()}
+      {text: goal, id: Math.random().toString()}
     ])
   }
 
+  const deleteGoalHandler = (id) => {
+    setGoalList(prevState => {
+      return goalList.filter(goal => goal.id !== id )
+    })
+  }
 
   return (
     <View style={styles.appContainer}>
-      <GoalInput />
-      <GoalItem goalList={goalList}/>
+      <GoalInput 
+          addGoal={addGoalHandler}  
+      />
+      <View style={styles.goalsContainer}>
+        <FlatList data={goalList} renderItem={itemData => {
+              return (
+                <GoalItem 
+                  onDeleteItem={deleteGoalHandler}    
+                  id={itemData.item.id}
+                  text={itemData.item.text}
+                />  
+              )
+            }}
+            keyExtractor={(item, index) => {
+              return item.id
+            }}
+        />
+      </View> 
+      
     </View>
   );
 }
@@ -34,5 +51,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     marginTop: 40
-  }
+  },
+  goalsContainer: {
+    marginTop: 25,
+    flex: 5
+  },
 });
