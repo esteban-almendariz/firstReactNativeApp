@@ -2,11 +2,14 @@ import { View, Text, FlatList, Pressable, StyleSheet } from "react-native";
 
 const GoalItem = ({onDeleteItem, id, text}) => {
     return (
-            <Pressable onPress={onDeleteItem.bind(this, id)}>
-                <View style={styles.goalItem}>
+            <View style={styles.goalItem}>
+                <Pressable 
+                    onPress={onDeleteItem.bind(this, id)}
+                    style={({pressed}) => pressed && styles.pressedItem}    
+                >
                     <Text style={styles.goalText}>{text}</Text>
-                </View>
-            </Pressable>
+                </Pressable>
+            </View>
     )
 }
 
@@ -14,11 +17,14 @@ const styles = StyleSheet.create({
       goalItem: {
         backgroundColor:'#5e0acc',
         borderRadius: 6,
-        padding: 10,
         marginBottom: 10
       },
       goalText: {
-        color:'white'
+        color:'white',
+        padding: 8
+      },
+      pressedItem: {
+        opacity: .5
       }
 })
 
